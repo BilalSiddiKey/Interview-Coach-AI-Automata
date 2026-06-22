@@ -95,17 +95,16 @@ if st.button("Start Interview"):
 
 elif st.session_state.current_state == "DOMAIN_SELECTION":
 
+    st.subheader("Select Interview Domain")
 
-st.subheader("Select Interview Domain")
-
-domain = st.selectbox(
-    "Domain",
-    [
-        "AI/ML",
-        "Data Science",
-        "Cybersecurity"
-    ]
-)
+    domain = st.selectbox(
+        "Domain",
+        [
+            "AI/ML",
+            "Data Science",
+            "Cybersecurity"
+        ]
+    )
 
 if st.button("Confirm Domain"):
 
