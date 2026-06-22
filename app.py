@@ -75,11 +75,11 @@ f"Difficulty: {st.session_state.selected_difficulty}"
 
 # =========================
 
-    if st.session_state.current_state == "START":
+if st.session_state.current_state == "START":
 
-        st.info(
-            "Welcome to the Interview Coach Assistant"
-        )
+    st.info(
+        "Welcome to the Interview Coach Assistant"
+    )
 
 if st.button("Start Interview"):
 
