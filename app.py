@@ -221,6 +221,11 @@ st.sidebar.write(
     f"Difficulty: {st.session_state.selected_difficulty}"
 )
 
+st.write("### Moore Machine State")
+
+st.info(
+    f"Current State: {st.session_state.current_state}"
+)
 
 question = st.text_input(
     "Enter your interview question:"
