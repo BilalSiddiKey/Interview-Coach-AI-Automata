@@ -1,15 +1,13 @@
 st.set_page_config(
-page_title="Interview Coach AI",
-page_icon="🎯",
-layout="wide"
+    page_title="Interview Coach AI",
+    page_icon="🎯",
+    layout="wide"
 )
 
 st.title("🎯 Automata-Based Interview Coach Assistant")
 
 # =========================
-
 # SESSION STATE
-
 # =========================
 
 if "current_state" not in st.session_state:
@@ -25,54 +23,48 @@ if "user_question" not in st.session_state:
     st.session_state.user_question = ""
 
 # =========================
-
-# MAIN DESCRIPTION
-
+# DESCRIPTION
 # =========================
 
 st.write("""
 This system demonstrates:
 
-* Regular Expressions (RE)
-* NFA
-* DFA
-* DFA Minimization
-* Moore Machine
-* CFG
-* PDA
-* Retrieval-Augmented Generation (RAG)
+- Regular Expressions (RE)
+- NFA
+- DFA
+- DFA Minimization
+- Moore Machine
+- CFG
+- PDA
+- Retrieval-Augmented Generation (RAG)
 
 Domains:
 
-* AI / Machine Learning
-* Data Science
-* Cybersecurity
-  """)
+- AI / Machine Learning
+- Data Science
+- Cybersecurity
+""")
 
 # =========================
-
 # SIDEBAR
-
 # =========================
 
 st.sidebar.title("Automata Dashboard")
 
 st.sidebar.write(
-f"Current State: {st.session_state.current_state}"
+    f"Current State: {st.session_state.current_state}"
 )
 
 st.sidebar.write(
-f"Selected Domain: {st.session_state.selected_domain}"
+    f"Selected Domain: {st.session_state.selected_domain}"
 )
 
 st.sidebar.write(
-f"Difficulty: {st.session_state.selected_difficulty}"
+    f"Selected Difficulty: {st.session_state.selected_difficulty}"
 )
 
 # =========================
-
-# STATE 1: START
-
+# START STATE
 # =========================
 
 if st.session_state.current_state == "START":
@@ -81,16 +73,14 @@ if st.session_state.current_state == "START":
         "Welcome to the Interview Coach Assistant"
     )
 
-if st.button("Start Interview"):
+    if st.button("Start Interview"):
 
-    st.session_state.current_state = "DOMAIN_SELECTION"
+        st.session_state.current_state = "DOMAIN_SELECTION"
 
-    st.rerun()
+        st.rerun()
 
 # =========================
-
-# STATE 2: DOMAIN SELECTION
-
+# DOMAIN STATE
 # =========================
 
 elif st.session_state.current_state == "DOMAIN_SELECTION":
@@ -106,23 +96,19 @@ elif st.session_state.current_state == "DOMAIN_SELECTION":
         ]
     )
 
-if st.button("Confirm Domain"):
+    if st.button("Confirm Domain"):
 
-    st.session_state.selected_domain = domain
+        st.session_state.selected_domain = domain
 
-    st.session_state.current_state = "DIFFICULTY_SELECTION"
+        st.session_state.current_state = "DIFFICULTY_SELECTION"
 
-    st.rerun()
-
+        st.rerun()
 
 # =========================
-
-# STATE 3: DIFFICULTY
-
+# DIFFICULTY STATE
 # =========================
 
 elif st.session_state.current_state == "DIFFICULTY_SELECTION":
-
 
     st.subheader("Select Difficulty")
 
@@ -135,63 +121,53 @@ elif st.session_state.current_state == "DIFFICULTY_SELECTION":
         ]
     )
 
-if st.button("Confirm Difficulty"):
+    if st.button("Confirm Difficulty"):
 
-    st.session_state.selected_difficulty = difficulty
+        st.session_state.selected_difficulty = difficulty
 
-    st.session_state.current_state = "QUESTION_STATE"
+        st.session_state.current_state = "QUESTION_STATE"
 
-    st.rerun()
-
+        st.rerun()
 
 # =========================
-
-# STATE 4: QUESTION
-
+# QUESTION STATE
 # =========================
 
 elif st.session_state.current_state == "QUESTION_STATE":
 
-
     st.success(
         f"""
-    ```
+Domain: {st.session_state.selected_domain}
 
-    Domain: {st.session_state.selected_domain}
-
-    Difficulty: {st.session_state.selected_difficulty}
-    """
+Difficulty: {st.session_state.selected_difficulty}
+"""
     )
 
+    question = st.text_input(
+        "Enter Interview Question"
+    )
 
-question = st.text_input(
-    "Enter Interview Question"
-)
+    if st.button("Ask Question"):
 
-if st.button("Ask Question"):
+        if question.strip() == "":
 
-    if question.strip() == "":
-        st.warning(
-            "Please enter a question."
-        )
+            st.warning(
+                "Please enter a question."
+            )
 
-    else:
+        else:
 
-        st.session_state.user_question = question
+            st.session_state.user_question = question
 
-        st.session_state.current_state = "EVALUATION_STATE"
+            st.session_state.current_state = "EVALUATION_STATE"
 
-        st.rerun()
-
+            st.rerun()
 
 # =========================
-
-# STATE 5: EVALUATION
-
+# EVALUATION STATE
 # =========================
 
 elif st.session_state.current_state == "EVALUATION_STATE":
-
 
     question = st.session_state.user_question
 
@@ -199,9 +175,7 @@ elif st.session_state.current_state == "EVALUATION_STATE":
 
     st.write(question)
 
-    chunks = retrieve_chunks(
-        question
-    )
+    chunks = retrieve_chunks(question)
 
     context = "\n".join(
         [
@@ -210,9 +184,7 @@ elif st.session_state.current_state == "EVALUATION_STATE":
         ]
     )
 
-prompt = f"""
-```
-
+    prompt = f"""
 You are Interview Coach AI.
 
 Use the context below to answer the question.
@@ -226,48 +198,42 @@ Question:
 Answer:
 """
 
+    answer = generate_answer(prompt)
 
-answer = generate_answer(
-    prompt
-)
+    st.write("## Answer")
 
-st.write("## Answer")
+    st.write(answer)
 
-st.write(answer)
+    st.write("## Sources")
 
-st.write("## Sources")
+    for chunk in chunks:
 
-for chunk in chunks:
+        st.write(
+            chunk["source"]
+        )
 
-    st.write(
-        chunk["source"]
-    )
+        st.divider()
 
-    st.divider()
+    col1, col2 = st.columns(2)
 
-col1, col2 = st.columns(2)
+    with col1:
 
-with col1:
+        if st.button("Next Question"):
 
-    if st.button("Next Question"):
+            st.session_state.current_state = "QUESTION_STATE"
 
-        st.session_state.current_state = "QUESTION_STATE"
+            st.rerun()
 
-        st.rerun()
+    with col2:
 
-with col2:
+        if st.button("End Interview"):
 
-    if st.button("End Interview"):
+            st.session_state.current_state = "INTERVIEW_COMPLETE"
 
-        st.session_state.current_state = "INTERVIEW_COMPLETE"
-
-        st.rerun()
-
+            st.rerun()
 
 # =========================
-
-# STATE 6: COMPLETE
-
+# COMPLETE STATE
 # =========================
 
 elif st.session_state.current_state == "INTERVIEW_COMPLETE":
@@ -284,15 +250,14 @@ elif st.session_state.current_state == "INTERVIEW_COMPLETE":
         f"Difficulty: {st.session_state.selected_difficulty}"
     )
 
-if st.button("Start New Interview"):
+    if st.button("Start New Interview"):
 
-    st.session_state.current_state = "START"
+        st.session_state.current_state = "START"
 
-    st.session_state.selected_domain = None
+        st.session_state.selected_domain = None
 
-    st.session_state.selected_difficulty = None
+        st.session_state.selected_difficulty = None
 
-    st.session_state.user_question = ""
+        st.session_state.user_question = ""
 
-    st.rerun()
-
+        st.rerun()
