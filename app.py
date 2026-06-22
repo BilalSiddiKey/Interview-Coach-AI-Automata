@@ -192,6 +192,10 @@ if "selected_domain" not in st.session_state:
 if "selected_difficulty" not in st.session_state:
     st.session_state.selected_difficulty = None
 
+if "user_question" not in st.session_state:
+    st.session_state.user_question = ""
+
+
 st.write("""
 Ask interview questions across:
 
@@ -322,6 +326,14 @@ Answer:
 
     st.write(answer)
 
+    st.write("## Sources")
+
+    for chunk in chunks:
+
+        st.write(chunk["source"])
+
+        st.divider()
+
     if st.button("Next Question"):
 
         st.session_state.current_state = "QUESTION_STATE"
@@ -333,38 +345,6 @@ Answer:
         st.session_state.current_state = "INTERVIEW_COMPLETE"
 
         st.rerun()
-
-    prompt = f"""
-You are Interview Coach AI.
-
-Use the context below to answer the question.
-
-Context:
-{context}
-
-Question:
-{question}
-
-Answer:
-"""
-
-    answer = generate_answer(
-        prompt
-    )
-
-    st.write("## Answer")
-
-    st.write(answer)
-
-    st.write("## Sources")
-
-    for chunk in chunks:
-
-        st.write(
-            chunk["source"]
-        )
-
-        st.divider()
 
 
 if st.session_state.current_state == "INTERVIEW_COMPLETE":
