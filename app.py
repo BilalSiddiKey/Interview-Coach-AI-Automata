@@ -182,7 +182,7 @@ if st.button("Ask Question"):
         st.session_state.current_state = "EVALUATION_STATE"
 
         st.rerun()
-```
+
 
 # =========================
 
@@ -192,23 +192,23 @@ if st.button("Ask Question"):
 
 elif st.session_state.current_state == "EVALUATION_STATE":
 
-```
-question = st.session_state.user_question
 
-st.subheader("Interview Question")
+    question = st.session_state.user_question
 
-st.write(question)
+    st.subheader("Interview Question")
 
-chunks = retrieve_chunks(
-    question
-)
+    st.write(question)
 
-context = "\n".join(
-    [
-        chunk["content"]
-        for chunk in chunks
-    ]
-)
+    chunks = retrieve_chunks(
+        question
+    )
+
+    context = "\n".join(
+        [
+            chunk["content"]
+            for chunk in chunks
+        ]
+    )
 
 prompt = f"""
 ```
