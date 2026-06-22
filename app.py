@@ -183,6 +183,19 @@ st.set_page_config(
 
 st.title("🎯 Interview Coach AI")
 
+# =========================
+# SESSION STATE
+# =========================
+
+if "current_state" not in st.session_state:
+    st.session_state.current_state = "START"
+
+if "selected_domain" not in st.session_state:
+    st.session_state.selected_domain = None
+
+if "selected_difficulty" not in st.session_state:
+    st.session_state.selected_difficulty = None
+
 st.write("""
 Ask interview questions across:
 
@@ -193,6 +206,20 @@ Ask interview questions across:
 - Cyber Security
 - Cloud & DevOps
 """)
+
+st.sidebar.title("Automata Dashboard")
+
+st.sidebar.write(
+    f"Current State: {st.session_state.current_state}"
+)
+
+st.sidebar.write(
+    f"Domain: {st.session_state.selected_domain}"
+)
+
+st.sidebar.write(
+    f"Difficulty: {st.session_state.selected_difficulty}"
+)
 
 
 question = st.text_input(
