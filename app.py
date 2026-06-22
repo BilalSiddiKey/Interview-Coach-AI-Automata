@@ -272,7 +272,6 @@ with col2:
 
 elif st.session_state.current_state == "INTERVIEW_COMPLETE":
 
-
     st.success(
         "Interview Completed Successfully"
     )
