@@ -152,18 +152,18 @@ if st.button("Confirm Difficulty"):
 
 elif st.session_state.current_state == "QUESTION_STATE":
 
-```
-st.success(
-    f"""
-```
 
-Domain: {st.session_state.selected_domain}
+    st.success(
+        f"""
+    ```
 
-Difficulty: {st.session_state.selected_difficulty}
-"""
-)
+    Domain: {st.session_state.selected_domain}
 
-```
+    Difficulty: {st.session_state.selected_difficulty}
+    """
+    )
+
+
 question = st.text_input(
     "Enter Interview Question"
 )
