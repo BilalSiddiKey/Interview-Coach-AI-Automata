@@ -13,16 +13,16 @@ st.title("🎯 Automata-Based Interview Coach Assistant")
 # =========================
 
 if "current_state" not in st.session_state:
-st.session_state.current_state = "START"
+    st.session_state.current_state = "START"
 
 if "selected_domain" not in st.session_state:
-st.session_state.selected_domain = None
+    st.session_state.selected_domain = None
 
 if "selected_difficulty" not in st.session_state:
-st.session_state.selected_difficulty = None
+    st.session_state.selected_difficulty = None
 
 if "user_question" not in st.session_state:
-st.session_state.user_question = ""
+    st.session_state.user_question = ""
 
 # =========================
 
