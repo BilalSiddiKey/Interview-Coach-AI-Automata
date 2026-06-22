@@ -1,3 +1,10 @@
+import streamlit as st
+import os
+import numpy as np
+from pypdf import PdfReader
+from sentence_transformers import SentenceTransformer
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+
 st.set_page_config(
     page_title="Interview Coach AI",
     page_icon="🎯",
