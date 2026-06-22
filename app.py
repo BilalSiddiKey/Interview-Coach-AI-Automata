@@ -226,7 +226,7 @@ Question:
 Answer:
 """
 
-```
+
 answer = generate_answer(
     prompt
 )
@@ -262,7 +262,7 @@ with col2:
         st.session_state.current_state = "INTERVIEW_COMPLETE"
 
         st.rerun()
-```
+
 
 # =========================
 
@@ -272,18 +272,18 @@ with col2:
 
 elif st.session_state.current_state == "INTERVIEW_COMPLETE":
 
-```
-st.success(
-    "Interview Completed Successfully"
-)
 
-st.write(
-    f"Domain: {st.session_state.selected_domain}"
-)
+    st.success(
+        "Interview Completed Successfully"
+    )
 
-st.write(
-    f"Difficulty: {st.session_state.selected_difficulty}"
-)
+    st.write(
+        f"Domain: {st.session_state.selected_domain}"
+    )
+
+    st.write(
+        f"Difficulty: {st.session_state.selected_difficulty}"
+    )
 
 if st.button("Start New Interview"):
 
@@ -296,4 +296,4 @@ if st.button("Start New Interview"):
     st.session_state.user_question = ""
 
     st.rerun()
-```
+
