@@ -123,17 +123,17 @@ if st.button("Confirm Domain"):
 
 elif st.session_state.current_state == "DIFFICULTY_SELECTION":
 
-```
-st.subheader("Select Difficulty")
 
-difficulty = st.selectbox(
-    "Difficulty",
-    [
-        "Easy",
-        "Medium",
-        "Hard"
-    ]
-)
+    st.subheader("Select Difficulty")
+
+    difficulty = st.selectbox(
+        "Difficulty",
+        [
+            "Easy",
+            "Medium",
+            "Hard"
+        ]
+    )
 
 if st.button("Confirm Difficulty"):
 
@@ -142,7 +142,7 @@ if st.button("Confirm Difficulty"):
     st.session_state.current_state = "QUESTION_STATE"
 
     st.rerun()
-```
+
 
 # =========================
 
