@@ -81,11 +81,11 @@ st.info(
     "Welcome to the Interview Coach Assistant"
 )
 
-if st.button("Start Interview"):
+    if st.button("Start Interview"):
 
-    st.session_state.current_state = "DOMAIN_SELECTION"
+        st.session_state.current_state = "DOMAIN_SELECTION"
 
-    st.rerun()
+        st.rerun()
 
 # =========================
 
